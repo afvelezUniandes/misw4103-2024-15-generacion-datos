@@ -1,0 +1,66 @@
+{
+  "posts": [
+    {
+      "id": "post-simple",
+      "titulo": "Lorem ipsum dolor sit amet",
+      "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "estado": "published"
+    },
+    {
+      "id": "post-titulo-largo",
+      "titulo": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor lorem ipsum test additional characters to ensure length",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "estado": "draft"
+    },
+    {
+      "id": "post-caracteres-especiales",
+      "titulo": "Lorem ipsum !@#$%^&*() test",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "estado": "published"
+    },
+    {
+      "id": "post-borrador",
+      "titulo": "Lorem ipsum draft test",
+      "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "estado": "draft"
+    },
+    {
+      "id": "post-titulo-corto",
+      "titulo": "Lorem",
+      "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "estado": "published"
+    },
+    {
+      "id": "post-titulo-numerico",
+      "titulo": "12345 Lorem ipsum",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "estado": "published"
+    },
+    {
+      "id": "post-titulo-otro-idioma",
+      "titulo": "你好 Lorem ipsum",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "estado": "published"
+    },
+    {
+      "id": "post-programado",
+      "titulo": "Lorem ipsum scheduled",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "fechaProgramada": "2024-12-31",
+      "estado": "scheduled"
+    },
+    {
+      "id": "post-editar",
+      "titulo": "Lorem ipsum original",
+      "tituloNuevo": "Lorem ipsum editado",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "estado": "published"
+    },
+    {
+      "id": "post-eliminar",
+      "titulo": "Lorem ipsum delete test",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "estado": "published"
+    }
+  ]
+}

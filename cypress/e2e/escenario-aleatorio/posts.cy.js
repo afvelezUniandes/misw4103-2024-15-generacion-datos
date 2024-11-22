@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-describe("Posts Ghost - 13 escenarios a-priori", () => {
+describe("Posts Ghost - 13 escenarios aleatorios", () => {
   beforeEach(() => {
     cy.visit("/ghost/#/signin");
     Cypress.on("uncaught:exception", (err, runnable) => {
