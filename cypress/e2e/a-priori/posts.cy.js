@@ -230,4 +230,23 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   //   });
   // });
 
+  // it("E0013 - Despublicar un post publicado", () => {
+  //   const postTitle = faker.lorem.words(3);
+  //   const postContent = faker.lorem.sentence();
+
+  //   cy.visit("/ghost/#/editor/post");
+  //   cy.get("textarea[data-test-editor-title-input]").type(postTitle);
+  //   cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postContent);
+  //   cy.get("span").contains("Publish").click();
+  //   cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
+  //   cy.get('button[data-test-button="confirm-publish"]').click();
+  //   cy.get("button[data-test-button='close-publish-flow']").click();
+  //   cy.contains("Published");
+    
+  //   cy.contains(postTitle).click();
+    
+  //   cy.get('button.gh-btn-editor.darkgrey.gh-unpublish-trigger').first().click();
+  //   cy.get("button").contains("Unpublish and revert to private draft").click();
+  //   cy.contains("Post reverted to a draft.");
+  // });
 });
