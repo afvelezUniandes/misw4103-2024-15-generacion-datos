@@ -18,34 +18,46 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
   it("E0001 - Crear post con título aleatorio", () => {
     const postTitle = faker.lorem.sentence();
     const postDescription = faker.lorem.sentence();
+
+    // Given que estoy en el editor de posts
     cy.visit("/ghost/#/editor/post");
+
+    // When ingreso un título aleatorio y una descripción
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
     cy.wait(2000);
+
+    // And publico el post
     cy.get("span").contains("Publish").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then el post debe estar publicado
     cy.contains("Published");
   });
 
   it("E0002 - Validar mensajes de error cuando título excede 255 caracteres", () => {
     const shortTitle = faker.lorem.words(2);
     const postDescription = faker.lorem.sentence();
+
+    // Given que creo un borrador de post
     cy.visit("/ghost/#/editor/post");
     cy.get("textarea[data-test-editor-title-input]").type(shortTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
     cy.wait(1000);
     
+    // When verifico que existe como borrador
     cy.visit("/ghost/#/posts");
     cy.contains("Draft").should("exist");
     
+    // And edito el título con uno demasiado largo
     cy.contains(shortTitle).click();
     cy.wait(1000);
-    
     const longTitle = faker.lorem.words(150); 
     cy.get("textarea[data-test-editor-title-input]").clear().type(longTitle);
     cy.get("span").contains("Publish").click();
 
+    // Then debo ver el mensaje de error apropiado
     cy.get('body').then(($body) => {
       if ($body.find('.gh-alert-red').length > 0) {
         cy.get('.gh-alert-red')
@@ -65,13 +77,21 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
   it("E0003 - Crear post con caracteres especiales en título", () => {
     const postTitle = `${faker.lorem.words(3)} !@#$%^&*() ${faker.lorem.word()}`;
     const postDescription = faker.lorem.sentence();
+
+    // Given que estoy en el editor de posts
     cy.visit("/ghost/#/editor/post");
+
+    // When ingreso un título con caracteres especiales
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
     cy.wait(2000);
+
+    // And publico el post
     cy.get("span").contains("Publish").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then el post debe estar publicado
     cy.contains("Published");
   });
 
@@ -80,6 +100,7 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const postDescription = faker.lorem.sentence();
     const editedTitle = faker.lorem.sentence();
 
+    // Given que creo y publico un post
     cy.visit("/ghost/#/editor/post");
     cy.get("textarea[data-test-editor-title-input]").type(originalTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
@@ -88,10 +109,13 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
     
+    // When edito el título del post
     cy.visit("/ghost/#/posts");
     cy.contains(originalTitle).click();
     cy.get("textarea[data-test-editor-title-input]").clear().type(editedTitle);
     cy.wait(1000);
+
+    // Then puedo actualizar el post
     cy.get('button').contains("Update").click();
   });
 
@@ -99,15 +123,22 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const postTitle = faker.lorem.sentence();
     const postDescription = faker.lorem.sentence();
     
+    // Given que estoy en el editor de posts
     cy.visit("/ghost/#/editor/post");
+
+    // When creo un nuevo post
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
     cy.wait(1000);
+
+    // And configuro la publicación programada
     cy.get("span").contains("Publish").click();
     cy.contains("Right now").click();
     cy.contains("Schedule for later").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then el post debe aparecer como programado
     cy.visit("/ghost/#/posts?type=scheduled");
     cy.contains(postTitle).should("exist").should("contain", "Scheduled");
   });
@@ -116,10 +147,15 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const postTitle = faker.lorem.sentence();
     const postDescription = faker.lorem.sentence();
     
+    // Given que estoy en el editor de posts
     cy.visit("/ghost/#/editor/post");
+
+    // When creo un nuevo post sin publicarlo
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
     cy.wait(2000);
+
+    // Then el post debe aparecer como borrador
     cy.visit("/ghost/#/posts?type=draft");
     cy.contains(postTitle).should("exist");
   });
@@ -128,13 +164,20 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const shortTitle = faker.lorem.word();
     const postDescription = faker.lorem.sentence();
     
+    // Given que estoy en el editor de posts
     cy.visit("/ghost/#/editor/post");
+
+    // When creo un post con título corto
     cy.get("textarea[data-test-editor-title-input]").type(shortTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
     cy.wait(2000);
+
+    // And publico el post
     cy.get("span").contains("Publish").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then el post debe estar publicado
     cy.contains("Published");
   });
 
@@ -142,13 +185,20 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const numericTitle = faker.number.int({ min: 10000, max: 99999 }).toString();
     const postDescription = faker.lorem.sentence();
     
+    // Given que estoy en el editor de posts
     cy.visit("/ghost/#/editor/post");
+
+    // When creo un post con título numérico
     cy.get("textarea[data-test-editor-title-input]").type(numericTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
     cy.wait(1000);
+
+    // And publico el post
     cy.get("span").contains("Publish").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then el post debe estar publicado
     cy.contains("Published");
   });
 
@@ -156,6 +206,7 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const postTitle = faker.lorem.sentence();
     const postDescription = faker.lorem.sentence();
   
+    // Given que creo y publico un post
     cy.visit("/ghost/#/editor/post");
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
@@ -164,11 +215,14 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
     
+    // When elimino el post
     cy.visit("/ghost/#/posts");
     cy.contains(postTitle).click();
     cy.get("button.settings-menu-toggle").click();
     cy.get('button[data-test-button="delete-post"]').click();
     cy.get('button[data-test-button="delete-post-confirm"]').click();
+
+    // Then el post no debe existir
     cy.visit("/ghost/#/posts");
     cy.contains(postTitle).should("not.exist");
   });
@@ -177,13 +231,20 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const title = "你好 привет";
     const postDescription = faker.lorem.sentence();
     
+    // Given que estoy en el editor de posts
     cy.visit("/ghost/#/editor/post");
+
+    // When creo un post con título en otro idioma
     cy.get("textarea[data-test-editor-title-input]").type(title);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
     cy.wait(1000);
+
+    // And publico el post
     cy.get("span").contains("Publish").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then el post debe estar publicado
     cy.contains("Published");
   });
 
@@ -191,6 +252,7 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const postTitle = faker.lorem.words(3);
     const postDescription = faker.lorem.sentence();
 
+    // Given que creo y publico un post
     cy.visit("/ghost/#/editor/post");
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
@@ -199,12 +261,15 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
     cy.get("button[data-test-button='close-publish-flow']").click();
+
+    // When reviso el historial del post
     cy.visit("/ghost/#/posts?type=published");
     cy.wait(1000);
     cy.contains(postTitle).click(); 
-    
     cy.get("button.settings-menu-toggle").click();
     cy.get("button[data-test-toggle='post-history']").click();
+
+    // Then debo ver el historial de cambios
     cy.contains("Post history").should("exist");
     cy.contains("Published").should("exist");
   });
@@ -213,17 +278,19 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const postTitle = faker.lorem.words(3);
     const postContent = faker.lorem.sentence();
 
+    // Given que estoy creando un post
     cy.visit("/ghost/#/editor/post");
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postContent);
     cy.wait(1000);
 
+    // When previsualizo el post
     cy.get("button[data-test-button='publish-preview']").first().click();
     cy.wait(1000);
 
+    // Then debo ver el contenido en la preview
     cy.get('iframe.gh-pe-iframe').then($iframe => {
       const $body = $iframe.contents().find('body');
-    
       cy.wrap($body).contains(postTitle).should('exist');
       cy.wrap($body).contains(postContent).should('exist');
     });
@@ -233,6 +300,7 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     const postTitle = faker.lorem.words(3);
     const postContent = faker.lorem.sentence();
 
+    // Given que creo y publico un post
     cy.visit("/ghost/#/editor/post");
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postContent);
@@ -241,11 +309,13 @@ describe("Posts Ghost - 13 escenarios aleatorios", () => {
     cy.get('button[data-test-button="confirm-publish"]').click();
     cy.get("button[data-test-button='close-publish-flow']").click();
     cy.contains("Published");
-    
+
+    // When despublico el post
     cy.contains(postTitle).click();
-    
     cy.get('button.gh-btn-editor.darkgrey.gh-unpublish-trigger').first().click();
     cy.get("button").contains("Unpublish and revert to private draft").click();
+
+    // Then el post debe estar como borrador
     cy.contains("Post reverted to a draft.");
   });
 });

@@ -19,13 +19,22 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     const paginaTitulo = faker.lorem.sentence();
     const paginaDescripcion = faker.lorem.paragraph();
     
+    // Given que estoy en el editor de páginas
     cy.visit("/ghost/#/editor/page");
+
+    // When ingreso un título aleatorio
     cy.get("textarea[data-test-editor-title-input]").type(paginaTitulo);
+
+    // And ingreso una descripción aleatoria
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescripcion);
     cy.wait(2000);
+
+    // And publico la página
     cy.get("span").contains("Publish").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then la página debe estar publicada
     cy.contains("Published");
   });
 
@@ -33,13 +42,22 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     const htmlTitulo = `<h1>${faker.lorem.words(3)}</h1>`;
     const paginaDescription = faker.lorem.paragraph();
     
+    // Given que estoy en el editor de páginas
     cy.visit("/ghost/#/editor/page");
+
+    // When ingreso un título con formato HTML
     cy.get("textarea[data-test-editor-title-input]").type(htmlTitulo);
+
+    // And ingreso una descripción
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescription);
     cy.wait(2000);
+
+    // And publico la página
     cy.get("span").contains("Publish").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then la página debe estar publicada
     cy.contains("Published");
   });
 
@@ -47,16 +65,23 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     const paginaTitulo = faker.lorem.words(3);
     const paginaDescripcion = faker.lorem.paragraph();
     
+    // Given que estoy en el editor de páginas
     cy.visit("/ghost/#/editor/page");
+
+    // When ingreso el título y descripción
     cy.get("textarea[data-test-editor-title-input]").type(paginaTitulo);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescripcion);
     
+    // And configuro la publicación programada
     cy.get("span").contains("Publish").click();
     cy.contains("Right now").click();
     cy.contains("Schedule for later").click();
     
+    // And confirmo la programación
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then la página debe aparecer en la lista de programadas
     cy.visit("/ghost/#/pages?type=scheduled");
     cy.contains(paginaTitulo).should("exist");
   });
@@ -65,13 +90,22 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     const paginaTitulo = faker.lorem.words(3);
     const paginaDescripcion = faker.lorem.paragraph(5);
     
+    // Given que estoy en el editor de páginas
     cy.visit("/ghost/#/editor/page");
+
+    // When ingreso un título
     cy.get("textarea[data-test-editor-title-input]").type(paginaTitulo);
+
+    // And ingreso un contenido extenso
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescripcion);
     cy.wait(2000);
+
+    // And publico la página
     cy.get("span").contains("Publish").click();
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
+
+    // Then la página debe estar publicada
     cy.contains("Published");
   });
 
@@ -79,7 +113,10 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     const paginaTitulo = faker.lorem.words(2);
     const paginaDescripcion = faker.lorem.paragraph();
     
+    // Given que creo una página inicial
     cy.visit("/ghost/#/editor/page");
+
+    // When creo y publico una página con título normal
     cy.get("textarea[data-test-editor-title-input]").type(paginaTitulo);
     cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescripcion);
     cy.wait(2000);
@@ -87,15 +124,18 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
     cy.get('button[data-test-button="confirm-publish"]').click();
     cy.contains("Published");
+
+    // And cierro el flujo de publicación
     cy.get("button[data-test-button='close-publish-flow']").click();
 
+    // And edito la página con un título demasiado largo
     cy.contains(paginaTitulo).click();
     cy.wait(1000);
-
     const tituloLargo = faker.lorem.words(150); 
     cy.get("textarea[data-test-editor-title-input]").clear().type(tituloLargo);  
-    cy.get("span").contains("Update").click(); 
+    cy.get("span").contains("Update").click();
 
+    // Then debo ver el mensaje de error apropiado
     cy.get('body').then(($body) => {
         if ($body.find('.gh-alert-red').length > 0) {
           cy.get('.gh-alert-red')
@@ -109,43 +149,51 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
           cy.contains("Retry").should("exist");
           cy.contains("Back to settings").should("exist");
         }
-      });
+    });
   });
 
-    it("E0019 - Despublicar una página publicada", () => {
-        const paginaTitulo = faker.lorem.words(3);
-        const paginaDescripcion = faker.lorem.paragraph();
-        
-        cy.visit("/ghost/#/editor/page");
-        cy.get("textarea[data-test-editor-title-input]").type(paginaTitulo);
-        cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescripcion);
-        cy.wait(1000);
-        
-        cy.get("span").contains("Publish").click();
-        cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
-        cy.get('button[data-test-button="confirm-publish"]').click();
-        cy.get("button[data-test-button='close-publish-flow']").click();
-        cy.contains("Published");
+  it("E0019 - Despublicar una página publicada", () => {
+    const paginaTitulo = faker.lorem.words(3);
+    const paginaDescripcion = faker.lorem.paragraph();
+    
+    // Given que creo y publico una página
+    cy.visit("/ghost/#/editor/page");
+    cy.get("textarea[data-test-editor-title-input]").type(paginaTitulo);
+    cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescripcion);
+    cy.wait(1000);
+    
+    cy.get("span").contains("Publish").click();
+    cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
+    cy.get('button[data-test-button="confirm-publish"]').click();
+    cy.get("button[data-test-button='close-publish-flow']").click();
+    cy.contains("Published");
 
-        cy.contains(paginaTitulo).click();
-        
-        cy.get('button[data-test-button="update-flow"]').first().click();
-        cy.get("button").contains("Unpublish and revert to private draft").click();
-        
-        cy.contains("Page reverted to a draft.");
-    });
+    // When accedo a la página publicada
+    cy.contains(paginaTitulo).click();
+    
+    // And la despublico
+    cy.get('button[data-test-button="update-flow"]').first().click();
+    cy.get("button").contains("Unpublish and revert to private draft").click();
+    
+    // Then la página debe estar como borrador
+    cy.contains("Page reverted to a draft.");
+  });
 
-    it("E0020 - Crear página como borrador y verificar su estado", () => {
-        const paginaTitulo = faker.lorem.words(3);
-        const paginaDescripcion = faker.lorem.paragraph();
-        
-        cy.visit("/ghost/#/editor/page");
-        cy.get("textarea[data-test-editor-title-input]").type(paginaTitulo);
-        cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescripcion);
-        cy.wait(2000);
+  it("E0020 - Crear página como borrador y verificar su estado", () => {
+    const paginaTitulo = faker.lorem.words(3);
+    const paginaDescripcion = faker.lorem.paragraph();
+    
+    // Given que estoy en el editor de páginas
+    cy.visit("/ghost/#/editor/page");
 
-        cy.visit("/ghost/#/pages?type=draft");
-        cy.contains(paginaTitulo).should("exist");
-    });
+    // When creo una página sin publicarla
+    cy.get("textarea[data-test-editor-title-input]").type(paginaTitulo);
+    cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(paginaDescripcion);
+    cy.wait(2000);
+
+    // Then la página debe aparecer en la lista de borradores
+    cy.visit("/ghost/#/pages?type=draft");
+    cy.contains(paginaTitulo).should("exist");
+  });
 
 });
