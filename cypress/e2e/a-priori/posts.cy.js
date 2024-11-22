@@ -187,4 +187,47 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   //   cy.get('button[data-test-button="confirm-publish"]').click();
   //   cy.contains("Published");
   // });
+
+  // it("E0011 - Crear post y verificar historial de cambios", () => {
+  //   const postTitle = faker.lorem.words(3);
+  //   const postDescription = faker.lorem.sentence();
+
+  //   cy.visit("/ghost/#/editor/post");
+  //   cy.get("textarea[data-test-editor-title-input]").type(postTitle);
+  //   cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postDescription);
+  //   cy.wait(1000);
+  //   cy.get("span").contains("Publish").click();
+  //   cy.get("button.gh-btn.gh-btn-black.gh-btn-large").click();
+  //   cy.get('button[data-test-button="confirm-publish"]').click();
+  //   cy.get("button[data-test-button='close-publish-flow']").click();
+  //   cy.visit("/ghost/#/posts?type=published");
+  //   cy.wait(1000);
+  //   cy.contains(postTitle).click(); 
+    
+  //   cy.get("button.settings-menu-toggle").click();
+  //   cy.get("button[data-test-toggle='post-history']").click();
+  //   cy.contains("Post history").should("exist");
+  //   cy.contains("Published").should("exist");
+  // });
+
+  // it("E0012 - Crear post y verificar preview antes de publicar", () => {
+  //   const postTitle = faker.lorem.words(3);
+  //   const postContent = faker.lorem.sentence();
+
+  //   cy.visit("/ghost/#/editor/post");
+  //   cy.get("textarea[data-test-editor-title-input]").type(postTitle);
+  //   cy.get('div[data-secondary-instance="false"] [data-kg="editor"]').type(postContent);
+  //   cy.wait(1000);
+
+  //   cy.get("button[data-test-button='publish-preview']").first().click();
+  //   cy.wait(1000);
+
+  //   cy.get('iframe.gh-pe-iframe').then($iframe => {
+  //     const $body = $iframe.contents().find('body');
+    
+  //     cy.wrap($body).contains(postTitle).should('exist');
+  //     cy.wrap($body).contains(postContent).should('exist');
+  //   });
+  // });
+
 });
