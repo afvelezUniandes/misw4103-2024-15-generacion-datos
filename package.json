@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "cypress:run": "cypress run"
+  },
+  "dependencies": {
+    "cypress": "^13.16.0"
+  }
+}
