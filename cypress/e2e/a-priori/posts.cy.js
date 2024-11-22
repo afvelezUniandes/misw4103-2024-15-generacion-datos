@@ -17,7 +17,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
 
   it("E0011 - Crear post con título aleatorio", () => {
     const postTitle = faker.lorem.sentence();
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.wait(2000);
     cy.get("span").contains("Publish").click();
@@ -29,7 +29,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   it("E0012 - Crear post como draft con título corto y luego editarlo para validar límite de caracteres", () => {
     // Crear post inicial con título corto
     const shortTitle = faker.lorem.words(3);
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(shortTitle);
     cy.wait(1000);
     
@@ -59,7 +59,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
 
   it("E0013 - Crear post con caracteres especiales en título", () => {
     const specialTitle = `${faker.lorem.words(3)} !@#$%^&*() ${faker.lorem.word()}`;
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(specialTitle);
     cy.wait(2000);
     cy.get("span").contains("Publish").click();
@@ -72,7 +72,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
     const originalTitle = faker.lorem.sentence();
     const editedTitle = faker.lorem.sentence();
 
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(originalTitle);
     cy.wait(2000);
     cy.get("span").contains("Publish").click();
@@ -89,7 +89,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   it("E0015 - Programar publicación de post", () => {
     const postTitle = faker.lorem.sentence();
     
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.wait(2000);
     cy.get("span").contains("Publish").click();
@@ -101,7 +101,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   it("E0016 - Crear post como borrador", () => {
     const postTitle = faker.lorem.sentence();
     
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.wait(2000);
     cy.visit("/ghost/#/posts");
@@ -111,7 +111,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   it("E0017 - Crear post con título corto", () => {
     const shortTitle = faker.lorem.word();
     
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(shortTitle);
     cy.wait(2000);
     cy.get("span").contains("Publish").click();
@@ -123,7 +123,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   it("E0018 - Crear post con título numérico", () => {
     const numericTitle = faker.number.int({ min: 10000, max: 99999 }).toString();
     
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(numericTitle);
     cy.wait(2000);
     cy.get("span").contains("Publish").click();
@@ -135,7 +135,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   it("E0019 - Crear y eliminar post", () => {
     const postTitle = faker.lorem.sentence();
     
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(postTitle);
     cy.wait(2000);
     cy.get("span").contains("Publish").click();
@@ -152,7 +152,7 @@ describe("Posts Ghost - 10 escenarios a-priori", () => {
   it("E0020 - Crear post con título en otro idioma", () => {
     const nonEnglishTitle = "título en español 你好 привет";
     
-    cy.visit("/ghost/#/editor/post");
+    cy.visit("/ghost/#/posts");
     cy.get("textarea[data-test-editor-title-input]").type(nonEnglishTitle);
     cy.wait(2000);
     cy.get("span").contains("Publish").click();
