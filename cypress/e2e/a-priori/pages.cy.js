@@ -173,7 +173,7 @@ describe("Pages Ghost - 10 escenarios con datos a-priori", () => {
 
     // And la despublico
     cy.get('button[data-test-button="update-flow"]').first().click();
-    cy.get("button").contains("Unpublish and revert to private draft").click();
+    cy.get("button").contains("Unpublish and revert to draft").click();
 
     // Then la página debe estar como borrador
     cy.contains("Page reverted to a draft.");
