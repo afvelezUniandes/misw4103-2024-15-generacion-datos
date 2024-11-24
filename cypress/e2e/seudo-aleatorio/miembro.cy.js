@@ -25,7 +25,7 @@ describe("Pruebas de miembros", () => {
     cy.url().should("include", "/ghost/#/dashboard");
   });
 
-  xit("E021 - Crear miembro", () => {
+  it("E021 - Crear miembro", () => {
     const memberData = mockarooData[21];
 
     // Given Abro Miembros
@@ -48,7 +48,7 @@ describe("Pruebas de miembros", () => {
     cy.contains(memberData.nombre);
   });
 
-  xit("E022 - Crear nuevo miembro solo con email", () => {
+  it("E022 - Crear nuevo miembro solo con email", () => {
     const memberData = mockarooData[22];
 
     // Given Abro Miembros
@@ -70,7 +70,7 @@ describe("Pruebas de miembros", () => {
     cy.contains(memberData.email);
   });
 
-  xit("E023 - Crear nuevo miembro solo con nombre", () => {
+  it("E023 - Crear nuevo miembro solo con nombre", () => {
     const memberData = mockarooData[23];
 
     // Given Abro Miembros
@@ -88,7 +88,7 @@ describe("Pruebas de miembros", () => {
     cy.contains("Please enter an email");
   });
 
-  xit("E024 - Crear nuevo miembro con email erroneo", () => {
+  it("E024 - Crear nuevo miembro con email erroneo", () => {
     const memberData = mockarooData[24];
 
     // Given Abro Miembros
@@ -111,7 +111,7 @@ describe("Pruebas de miembros", () => {
     cy.contains("Invalid Email");
   });
 
-  xit("E025 - Editar miembro", () => {
+  it("E025 - Editar miembro", () => {
     const memberData = mockarooData[25];
 
     cy.visit("/ghost/#/members");
@@ -143,7 +143,7 @@ describe("Pruebas de miembros", () => {
     cy.contains("Saved");
   });
 
-  xit("E026 - Editar miembro con email erroneo", () => {
+  it("E026 - Editar miembro con email erroneo", () => {
     const memberData = mockarooData[26];
 
     cy.visit("/ghost/#/members");
@@ -177,7 +177,7 @@ describe("Pruebas de miembros", () => {
     cy.contains("Invalid Email");
   });
 
-  xit("E027 - Eliminar miembro", () => {
+  it("E027 - Eliminar miembro", () => {
     const memberData = mockarooData[27];
 
     cy.visit("/ghost/#/members");
@@ -212,7 +212,7 @@ describe("Pruebas de miembros", () => {
     cy.contains(memberData.nombreEditado).should("not.exist");
   });
 
-  xit("E028 - Crear miembro con newsletter desactivado", () => {
+  it("E028 - Crear miembro con newsletter desactivado", () => {
     const memberData = mockarooData[28];
 
     // Given Abro Miembros
@@ -238,7 +238,7 @@ describe("Pruebas de miembros", () => {
     cy.contains(memberData.nombre);
   });
 
-  xit("E029 - Crear link de acceso como miembro", () => {
+  it("E029 - Crear link de acceso como miembro", () => {
     const memberData = mockarooData[29];
 
     cy.visit("/ghost/#/members");
