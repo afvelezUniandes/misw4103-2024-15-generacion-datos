@@ -6,6 +6,8 @@ module.exports = defineConfig({
     env: {
       username: "a@a.com",
       password: "ABC1234abc",
+      moockarooKey: "ce4699b0",
+      moockarooSchema: "test-schema",
     },
 
     setupNodeEvents(on, config) {
