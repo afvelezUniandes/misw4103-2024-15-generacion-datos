@@ -61,6 +61,71 @@
       "titulo": "Lorem ipsum delete test",
       "contenido": "Lorem ipsum dolor sit amet",
       "estado": "published"
+    },
+    {
+      "id": "post-vacio",
+      "titulo": "a",
+      "contenido": "",
+      "estado": "published"
+    },
+    {
+      "id": "post-titulo-vacio",
+      "titulo": " ",
+      "contenido": "!@#$%^&*()",
+      "estado": "published"
+    },
+    {
+      "id": "post-contenido-vacio",
+      "titulo": "Lorem ipsum",
+      "contenido": " ",
+      "estado": "published"
+    },
+    {
+      "id": "post-emojis",
+      "titulo": "😀😃😄😁😆😅😂🤣",
+      "contenido": "😀😃😄😁😆😅😂🤣",
+      "estado": "published"
+    },
+    {
+      "id": "post-content-emojis",
+      "titulo": "Lorem impsum",
+      "contenido": "😀😃😄😁😆😅😂🤣",
+      "estado": "published"
+    },
+    {
+      "id": "post-etiquetas",
+      "titulo": "Lorem ipsum",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "etiquetas": ["tag1"],
+      "estado": "published"
+    },
+    {
+      "id": "post-url",
+      "titulo": "Lorem ipsum",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "url": "new-url-1",
+      "estado": "published"
+    },
+    {
+      "id": "post-autor-secundario",
+      "titulo": "Lorem ipsum",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "autorSecundario": "Author2",
+      "estado": "published"
+    },
+    {
+      "id": "post-html",
+      "titulo": "Lorem ipsum",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "html": "<p> Hello world </p>",
+      "estado": "published"
+    },
+    {
+      "id": "post-markdown",
+      "titulo": "Lorem ipsum",
+      "contenido": "Lorem ipsum dolor sit amet",
+      "markdown": "## Hello world",
+      "estado": "published"
     }
   ]
 }
