@@ -15,7 +15,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.url().should("include", "/ghost/#/dashboard");
   });
 
-  it("E020 - Crear página con título y descripción aleatoria", () => {
+  it("E021 - Crear página con título y descripción aleatoria", () => {
     const paginaTitulo = faker.lorem.sentence();
     const paginaDescripcion = faker.lorem.paragraph();
 
@@ -40,7 +40,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.contains("Published");
   });
 
-  it("E021 - Crear página con título HTML y validar renderizado", () => {
+  it("E022 - Crear página con título HTML y validar renderizado", () => {
     const htmlTitulo = `<h1>${faker.lorem.words(3)}</h1>`;
     const paginaDescription = faker.lorem.paragraph();
 
@@ -65,7 +65,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.contains("Published");
   });
 
-  it("E022 - Crear página y programar publicación", () => {
+  it("E023 - Crear página y programar publicación", () => {
     const paginaTitulo = faker.lorem.words(3);
     const paginaDescripcion = faker.lorem.paragraph();
 
@@ -92,7 +92,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.contains(paginaTitulo).should("exist");
   });
 
-  it("E023 - Crear página con contenido extenso", () => {
+  it("E024 - Crear página con contenido extenso", () => {
     const paginaTitulo = faker.lorem.words(3);
     const paginaDescripcion = faker.lorem.paragraph(5);
 
@@ -117,7 +117,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.contains("Published");
   });
 
-  it("E024 - Validar mensajes de error cuando título excede 255 caracteres", () => {
+  it("E025 - Validar mensajes de error cuando título excede 255 caracteres", () => {
     const paginaTitulo = faker.lorem.words(2);
     const paginaDescripcion = faker.lorem.paragraph();
 
@@ -167,7 +167,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     });
   });
 
-  it("E025 - Despublicar una página publicada", () => {
+  it("E026 - Despublicar una página publicada", () => {
     const paginaTitulo = faker.lorem.words(3);
     const paginaDescripcion = faker.lorem.paragraph();
 
@@ -196,7 +196,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.contains("Page reverted to a draft.");
   });
 
-  it("E026 - Crear página como borrador y verificar su estado", () => {
+  it("E027 - Crear página como borrador y verificar su estado", () => {
     const paginaTitulo = faker.lorem.words(3);
     const paginaDescripcion = faker.lorem.paragraph();
 
@@ -215,7 +215,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.contains(paginaTitulo).should("exist");
   });
 
-  it("E027 - Crear una página con contenido con titulo y contenido con emojies", () => {
+  it("E028 - Crear una página con contenido con titulo y contenido con emojies", () => {
     const paginaTitulo = `${faker.lorem.words(3)} 🚀🚀🚀 ${faker.lorem.word()}`;
     const paginaDescripcion = `${faker.lorem.sentence()} 🚀🚀🚀 ${faker.lorem.sentence()}`;
 
@@ -234,7 +234,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.contains(paginaTitulo).should("exist");
   });
 
-  it("E028 - Crear página y agregar etiquetas", () => {
+  it("E029 - Crear página y agregar etiquetas", () => {
     const paginaTitulo = faker.lorem.words(3);
     const paginaDescripcion = faker.lorem.sentence();
     const paginaEtiqueta = faker.lorem.word();
@@ -266,7 +266,7 @@ describe("Pages Ghost - 10 escenarios aleatorios", () => {
     cy.contains("Published");
   });
 
-  it("E029 - Crear página y asignar una URL", () => {
+  it("E030 - Crear página y asignar una URL", () => {
     const paginaTitulo = faker.lorem.words(3);
     const paginaDescripcion = faker.lorem.sentence();
     const paginaUrl = faker.lorem.word();
